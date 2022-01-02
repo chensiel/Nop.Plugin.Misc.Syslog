@@ -1,0 +1,11 @@
+﻿{
+  "Group": "Misc",
+  "FriendlyName": "Syslog",
+  "Version": "1.0",
+  "SupportedVersions": [ "4.40" ],
+  "Author": "chensiel",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.Misc.Syslog.dll",
+  "Description": "This plugin allows to ship logs to syslog server",
+  "SystemName": "Misc.Syslog"
+}
