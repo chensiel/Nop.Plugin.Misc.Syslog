@@ -17,8 +17,6 @@ namespace Nop.Plugin.Misc.Syslog.Services
         private readonly IDateTimeHelper _dateTimeHelper;
         private readonly ISettingService _settingService;
         private readonly SyslogSettings _settings;
-        private readonly IStoreContext _storeContext;
-        private readonly IWorkContext _workContext;
         private readonly UdpClient _client;
         private readonly IRepository<Log> _repositoryLog;
         private readonly TimeZoneInfo _timezone;
@@ -29,16 +27,12 @@ namespace Nop.Plugin.Misc.Syslog.Services
             IDateTimeHelper dateTimeHelper
             , ISettingService settingService
             , SyslogSettings settings
-            , IStoreContext storeContext
-            , IWorkContext workContext
             , IRepository<Log> repositoryLog
             )
         {
             _dateTimeHelper = dateTimeHelper;
             _settingService = settingService;
             _settings = settings;
-            _storeContext = storeContext;
-            _workContext = workContext;
             _repositoryLog = repositoryLog;
             _storeTimezone = _dateTimeHelper.DefaultStoreTimeZone;
             _timezone = TimeZoneInfo.FindSystemTimeZoneById(_settings.ServerTimezone);
@@ -109,7 +103,10 @@ namespace Nop.Plugin.Misc.Syslog.Services
 
 
             //just keep unshipped or [LimitAmount] logs
-            var log = await _repositoryLog.Table.OrderBy(o => o.Id).Skip(_settings.LimitAmount).FirstOrDefaultAsync();
+            var log = await _repositoryLog.Table
+                            .OrderByDescending(o => o.Id)
+                            .Skip(_settings.LimitAmount)
+                            .FirstOrDefaultAsync();
             if (log != null)
             {
                 if (log.Id > _settings.CurrentLogId)
