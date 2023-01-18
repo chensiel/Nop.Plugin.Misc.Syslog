@@ -11,7 +11,7 @@ namespace Nop.Plugin.Misc.Syslog
         /// <summary>
         /// Gets a plugin system name
         /// </summary>
-        public static string SystemName => "Misc.Syslog";
+        public const string SYSTEM_NAME = "Misc.Syslog";
 
         /// <summary>
         /// Gets a plugin partner name

@@ -2,107 +2,120 @@
 
 @using Nop.Plugin.Misc.Syslog
 @using Nop.Plugin.Misc.Syslog.Models
+@inject Nop.PluginAcl.Services.IPluginAclService pluginAclService
 
 @{
     Layout = "_ConfigurePlugin";
 }
 
 <form asp-controller="Syslog" asp-action="Configure" method="post">
-	<div class="card card-default">
-		<div class="card-header"><h2>@T("Admin.Configuration.Plugins.Misc.Configure")</h2></div>
-		<div class="card-body">
-			<div class="form-group row">
-				<div class="col-md-3">
-					<nop-label asp-for="Host" />
-				</div>
-				<div class="col-md-9">
-					<nop-editor asp-for="Host" />
-					<span asp-validation-for="Host"></span>
-				</div>
-			</div>
-			<div class="form-group row">
-				<div class="col-md-3">
-					<nop-label asp-for="Port" />
-				</div>
-				<div class="col-md-9">
-					<nop-editor asp-for="Port" />
-					<span asp-validation-for="Port"></span>
-				</div>
-			</div>
-			<div class="form-group row">
-				<div class="col-md-3">
-					<nop-label asp-for="HostName" />
-				</div>
-				<div class="col-md-9">
-					<nop-editor asp-for="HostName" />
-					<span asp-validation-for="HostName"></span>
-				</div>
-			</div>
-			<div class="form-group row">
-				<div class="col-md-3">
-					<nop-label asp-for="AppName" />
-				</div>
-				<div class="col-md-9">
-					<nop-editor asp-for="AppName" />
-					<span asp-validation-for="AppName"></span>
-				</div>
-			</div>
-			<div class="form-group row">
-				<div class="col-md-3">
-					<nop-label asp-for="Facility" />
-				</div>
-				<div class="col-md-9">
-					<nop-select asp-for="Facility" asp-items="Model.Facilities" />
-				</div>
-			</div>
-			<div class="form-group row">
-				<div class="col-md-3">
-					<nop-label asp-for="BatchSize" />
-				</div>
-				<div class="col-md-9">
-					<nop-editor asp-for="BatchSize" />
-					<span asp-validation-for="BatchSize"></span>
-				</div>
-			</div>
-			<div class="form-group row">
-				<div class="col-md-3">
-					<nop-label asp-for="LimitDays" />
-				</div>
-				<div class="col-md-9">
-					<nop-editor asp-for="LimitDays" />
-					<span asp-validation-for="LimitDays"></span>
-				</div>
-			</div>
-			<div class="form-group row">
-				<div class="col-md-3">
-					<nop-label asp-for="LimitAmount" />
-				</div>
-				<div class="col-md-9">
-					<nop-editor asp-for="LimitAmount" />
-					<span asp-validation-for="LimitAmount"></span>
-				</div>
-			</div>
-			<div class="form-group row">
-				<div class="col-md-3">
-					<nop-label asp-for="Levels" />
-				</div>
-				<div class="col-md-9">
-					<nop-select asp-for="Levels" asp-items="Model.LogLevels" asp-multiple="true" />
-				</div>
-			</div>
-			<div class="form-group row">
-				<div class="col-md-3">
-					<nop-label asp-for="ServerTimezone" />
-				</div>
-				<div class="col-md-9">
-					<nop-select asp-for="ServerTimezone" asp-items="Model.Timezones"  />
-				</div>
-			</div>
-			<div class="form-group row">
-				<div class="col-md-9 offset-md-3">
-					<button type="submit" class="btn btn-primary">@T("Admin.Common.Save")</button>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="card card-default">
+        <div class="card-header">
+            <div class="content-header clearfix">
+                <h2 class="float-left">
+                    @T("Admin.Configuration.Plugins.Misc.Configure")
+                </h2>
+                <div class="float-right">
+                    <a href="@pluginAclService.GetConfigurationLink(SyslogDefaults.SYSTEM_NAME)" class="btn btn-info">
+                        <i class="far fa-file-pdf"></i>
+                        @T(Nop.PluginAcl.Resources.CONFIGURATION)
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="form-group row">
+                <div class="col-md-3">
+                    <nop-label asp-for="Host" />
+                </div>
+                <div class="col-md-9">
+                    <nop-editor asp-for="Host" />
+                    <span asp-validation-for="Host"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-3">
+                    <nop-label asp-for="Port" />
+                </div>
+                <div class="col-md-9">
+                    <nop-editor asp-for="Port" />
+                    <span asp-validation-for="Port"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-3">
+                    <nop-label asp-for="HostName" />
+                </div>
+                <div class="col-md-9">
+                    <nop-editor asp-for="HostName" />
+                    <span asp-validation-for="HostName"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-3">
+                    <nop-label asp-for="AppName" />
+                </div>
+                <div class="col-md-9">
+                    <nop-editor asp-for="AppName" />
+                    <span asp-validation-for="AppName"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-3">
+                    <nop-label asp-for="Facility" />
+                </div>
+                <div class="col-md-9">
+                    <nop-select asp-for="Facility" asp-items="Model.Facilities" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-3">
+                    <nop-label asp-for="BatchSize" />
+                </div>
+                <div class="col-md-9">
+                    <nop-editor asp-for="BatchSize" />
+                    <span asp-validation-for="BatchSize"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-3">
+                    <nop-label asp-for="LimitDays" />
+                </div>
+                <div class="col-md-9">
+                    <nop-editor asp-for="LimitDays" />
+                    <span asp-validation-for="LimitDays"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-3">
+                    <nop-label asp-for="LimitAmount" />
+                </div>
+                <div class="col-md-9">
+                    <nop-editor asp-for="LimitAmount" />
+                    <span asp-validation-for="LimitAmount"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-3">
+                    <nop-label asp-for="Levels" />
+                </div>
+                <div class="col-md-9">
+                    <nop-select asp-for="Levels" asp-items="Model.LogLevels" asp-multiple="true" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-3">
+                    <nop-label asp-for="ServerTimezone" />
+                </div>
+                <div class="col-md-9">
+                    <nop-select asp-for="ServerTimezone" asp-items="Model.Timezones" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-9 offset-md-3">
+                    <button type="submit" class="btn btn-primary">@T("Admin.Common.Save")</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </form>

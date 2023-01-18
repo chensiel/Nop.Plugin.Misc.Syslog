@@ -3,7 +3,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Nop.Core;
 using Nop.Core.Domain.Cms;
-using Nop.Core.Domain.Tasks;
+using Nop.Core.Domain.ScheduleTasks;
 using Nop.Services.Cms;
 using Nop.Services.Common;
 using Nop.Services.Configuration;
@@ -11,9 +11,9 @@ using Nop.Services.Localization;
 using Nop.Services.Messages;
 using Nop.Services.Plugins;
 using Nop.Services.Stores;
-using Nop.Services.Tasks;
-using Nop.Web.Framework.Infrastructure;
-using Task = System.Threading.Tasks.Task;
+using Nop.Services.ScheduleTasks;
+using Nop.Web.Framework.Menu;
+using Nop.Services.Security;
 
 namespace Nop.Plugin.Misc.Syslog
 {
@@ -29,6 +29,7 @@ namespace Nop.Plugin.Misc.Syslog
         private readonly IScheduleTaskService _scheduleTaskService;
         private readonly ISettingService _settingService;
         private readonly IWebHelper _webHelper;
+        private readonly IPermissionService _permissionService;
 
         #endregion
 
@@ -39,13 +40,16 @@ namespace Nop.Plugin.Misc.Syslog
             ILocalizationService localizationService,
             IScheduleTaskService scheduleTaskService,
             ISettingService settingService,
-            IWebHelper webHelper)
+            IWebHelper webHelper,
+            IPermissionService permissionService)
         {
             _genericAttributeService = genericAttributeService;
             _localizationService = localizationService;
             _scheduleTaskService = scheduleTaskService;
             _settingService = settingService;
             _webHelper = webHelper;
+            _permissionService = permissionService;
+
         }
 
         #endregion
@@ -92,7 +96,7 @@ namespace Nop.Plugin.Misc.Syslog
             }
 
             //locales
-            await _localizationService.AddLocaleResourceAsync(new Dictionary<string, string>
+            await _localizationService.AddOrUpdateLocaleResourceAsync(new Dictionary<string, string>
             {
                 ["Plugins.Misc.Syslog.Fields.Host"] = "Host/IP",
                 ["Plugins.Misc.Syslog.Fields.Host.Hint"] = "Syslog server host or ip address",

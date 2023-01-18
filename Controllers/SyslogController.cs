@@ -64,7 +64,7 @@ namespace Nop.Plugin.Misc.Syslog.Controllers
         {
             var model = await PrepareModelAsync();
 
-            return View($"~/Plugins/{SyslogDefaults.SystemName}/Views/Configure.cshtml", model);
+            return View($"~/Plugins/{SyslogDefaults.SYSTEM_NAME}/Views/Configure.cshtml", model);
         }
 
         [AutoValidateAntiforgeryToken]
@@ -120,6 +120,12 @@ namespace Nop.Plugin.Misc.Syslog.Controllers
             return await Configure();
         }
 
+        [Area(AreaNames.Admin)]
+        public IActionResult Test()
+        {
+            return Ok(DateTimeOffset.Now.ToUnixTimeMilliseconds());
+        }
+
         #endregion
 
         async Task<ConfigurationModel> PrepareModelAsync(ConfigurationModel model = null)
@@ -133,7 +139,7 @@ namespace Nop.Plugin.Misc.Syslog.Controllers
             model.BatchSize = _settings.BatchSize;
             model.Facility = _settings.Facility;
             model.HostName = _settings.HostName;
-            model.Levels = _settings.Levels.Split(',').Where(o=>!string.IsNullOrWhiteSpace(o)).Select(o => int.Parse(o)).ToList();
+            model.Levels = _settings.Levels.Split(',').Where(o => !string.IsNullOrWhiteSpace(o)).Select(o => int.Parse(o)).ToList();
             model.Port = _settings.Port;
             model.ServerTimezone = _settings.ServerTimezone;
 

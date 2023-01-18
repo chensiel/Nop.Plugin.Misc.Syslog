@@ -1,8 +1,8 @@
 ﻿{
   "Group": "Misc",
   "FriendlyName": "Syslog",
-  "Version": "1.0",
-  "SupportedVersions": [ "4.40" ],
+  "Version": "1.1",
+  "SupportedVersions": [ "4.60" ],
   "Author": "chensiel",
   "DisplayOrder": 1,
   "FileName": "Nop.Plugin.Misc.Syslog.dll",

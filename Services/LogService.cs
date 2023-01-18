@@ -64,7 +64,7 @@ namespace Nop.Plugin.Misc.Syslog.Services
                 _settings.BatchSize = 500;
             }
 
-            var levels = _settings.Levels.Split(',');
+            var levels = _settings.Levels.Split(',').Where(q=>!string.IsNullOrWhiteSpace(q)).ToArray();
             if (levels.Length == 0)
             {
                 _levels = new int[]

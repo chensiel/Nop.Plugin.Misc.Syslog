@@ -1,5 +1,4 @@
-﻿using Nop.Services.Tasks;
-using Task = System.Threading.Tasks.Task;
+﻿using System.Threading.Tasks;
 
 namespace Nop.Plugin.Misc.Syslog.Services
 {

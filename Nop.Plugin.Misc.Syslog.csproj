@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <Copyright>Copyright © CHUYIYU</Copyright>
     <Company>CHUYIYU</Company>
     <Authors>chensiel</Authors>
     <PackageLicenseUrl></PackageLicenseUrl>
     <RepositoryUrl>https://github.com/chensiel/Nop.Plugin.Misc.Syslog</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
-    <OutputPath>..\..\nopCommerce\src\Presentation\Nop.Web\Plugins\Misc.Syslog</OutputPath>
+    <OutputPath>..\nopCommerce\src\Presentation\Nop.Web\Plugins\Misc.Syslog</OutputPath>
     <OutDir>$(OutputPath)</OutDir>
     <!--Set this parameter to true to get the dlls copied from the NuGet cache to the output of your project. 
     You need to set this parameter to true if your plugin has a nuget package 
@@ -38,11 +38,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ClearPluginAssemblies Include="$(MSBuildProjectDirectory)\.\..\nopCommerce\src\Build\ClearPluginAssemblies.proj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\nopCommerce\src\Presentation\Nop.Web.Framework\Nop.Web.Framework.csproj" />
+    <ProjectReference Include="..\nopCommerce\src\Presentation\Nop.Web.Framework\Nop.Web.Framework.csproj" />
+	  <ClearPluginAssemblies Include="$(MSBuildProjectDirectory)\..\nopCommerce\src\Build\ClearPluginAssemblies.proj" />
   </ItemGroup>
 
   <!-- This target execute after "Build" target -->
